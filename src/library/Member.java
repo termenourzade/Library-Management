@@ -1,26 +1,38 @@
 package library;
 
+import datastructures.lists.CustomLinkedList;
+
+import java.util.NoSuchElementException;
+
 public class Member {
     private String memberId;
     private String name;
-    // TODO: Define a data structure to hold transactions of each member
+    CustomLinkedList<Transaction> transactions;
 
     public Member(String memberId, String name) {
         this.memberId = memberId;
         this.name = name;
-        // TODO: Initialize your data structure here
+        transactions = new CustomLinkedList<>();
     }
 
     public String getMemberId() { return memberId; }
     public String getName() { return name; }
 
     public void addTransaction(Transaction transaction) {
-        // TODO
+        try {
+            transactions.add(transaction);
+        }catch (NullPointerException e) {
+            throw new NullPointerException("Transaction cannot be null");
+        }
+
     }
 
     public Transaction getLastTransaction() {
-        // TODO
-        return null;
+        try {
+            return transactions.getLast();
+        }catch (NoSuchElementException e){
+            return null;
+        }
     }
 
     @Override
